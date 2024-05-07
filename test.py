@@ -21,7 +21,7 @@ st.write("""Unlock the Faces: Discover the Hidden Expressions with Precision."""
 
 st.divider()
 
-    col1, col2 = st.columns(2)
+col1, col2 = st.columns(2)
 
     with col1:
         inp_img = takeImage() 
@@ -37,7 +37,7 @@ st.divider()
                 #### Image Entered
                 """
             )
-            st.image(inp_img)
+        st.image(inp_img)
 
 image = cv2.imread('./input.jpg')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
