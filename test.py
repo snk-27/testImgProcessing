@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import streamlit as st
-import cv2
+
 
 def takeImage():
     uploaded_file = st.file_uploader("Choose a image", type = ['jpg', 'png'])
