@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 import streamlit as st
 import cv2
 
@@ -23,27 +20,27 @@ st.divider()
 
 col1, col2 = st.columns(2)
 
-    with col1:
-        inp_img = takeImage() 
+with col1:
+    inp_img = takeImage() 
     
     # storing image as a file
     if inp_img:
         with open("input.jpg","wb") as f:
             f.write(inp_img)
         
-        with col2:
-            st.write(
-                """
-                #### Image Entered
-                """
-            )
-        st.image(inp_img)
+with col2:
+    st.write(
+        """
+        #### Image Entered
+        """
+    )
+    st.image(inp_img)
 
 image = cv2.imread('./input.jpg')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-FaceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-eye_cascade = cv2.CascadeClassifier("haarcascade_eye_tree_eyeglasses.xml")
+faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye_tree_eyeglasses.xml')
 
 faces = faceCascade.detectMultiScale(
     gray,
@@ -66,21 +63,20 @@ for (x, y, w, h) in faces:
     cv2.rectangle(image, (x, y), (x + w, y + h), (0,0,255), 2)
 
 status = cv2.imwrite('output.jpg', image)
-        print("[INFO] Image besiktas2.jpg written to filesystem: ", status)
+print("[INFO] Image besiktas2.jpg written to filesystem: ", status)
 
-        st.divider()
+st.divider()
 
-        if len(faces) != 0:
-            st.write(f"""### Output""")
-            st.image('./output.jpg')
-            st.write(f"""#### Information:""")
-            if len(faces) > 1:
-                st.write("Found {0} Faces in the image!".format(len(faces)))
-            else:
-                st.write("Found {0} Face in the image!".format(len(faces)))
-        else:
-            st.write(f"""### Output""")
-            st.write(
-                f"Couldn't find any face in the image. Please enter any other image."
-            )
-
+if len(faces) != 0:
+    st.write(f"""### Output""")
+    st.image('./output.jpg')
+    st.write(f"""#### Information:""")
+    if len(faces) > 1:
+        st.write("Found {0} Faces in the image!".format(len(faces)))
+    else:
+        st.write("Found {0} Face in the image!".format(len(faces)))
+else:
+    st.write(f"""### Output""")
+    st.write(
+        f"Couldn't find any face in the image. Please enter any other image."
+    )
