@@ -17,9 +17,9 @@ def takeImage():
         return img
 
 st.header("Face Detection Model")
-    st.write("""Unlock the Faces: Discover the Hidden Expressions with Precision.""")
+st.write("""Unlock the Faces: Discover the Hidden Expressions with Precision.""")
 
-    st.divider()
+st.divider()
 
     col1, col2 = st.columns(2)
 
