@@ -1,5 +1,8 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 import streamlit as st
-import cv2 as cv
+import cv2
 
 def takeImage():
     uploaded_file = st.file_uploader("Choose a image", type = ['jpg', 'png'])
@@ -33,11 +36,11 @@ with col2:
     )
     st.image(inp_img)
 
-image = cv.imread('./input.jpg')
-gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+image = cv2.imread('./input.jpg')
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-faceCascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_frontalface_default.xml')
-eye_cascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_eye_tree_eyeglasses.xml')
+faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye_tree_eyeglasses.xml')
 
 faces = faceCascade.detectMultiScale(
     gray,
@@ -47,19 +50,19 @@ faces = faceCascade.detectMultiScale(
 )
 
 for (x,y,w,h) in faces:
-    cv.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
+    cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
 
 for (x,y,w,h) in faces:
     roi_gray = gray[y:y+h, x:x+w]
     roi_color = image[y:y+h, x:x+w]
     eyes = eye_cascade.detectMultiScale(roi_gray)
     for (ex,ey,ew,eh) in eyes:
-        cv.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+        cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
 for (x, y, w, h) in faces:
-    cv.rectangle(image, (x, y), (x + w, y + h), (0,0,255), 2)
+    cv2.rectangle(image, (x, y), (x + w, y + h), (0,0,255), 2)
 
-status = cv.imwrite('output.jpg', image)
+status = cv2.imwrite('output.jpg', image)
 print("[INFO] Image besiktas2.jpg written to filesystem: ", status)
 
 st.divider()
