@@ -42,8 +42,8 @@ st.header("Face Detection Model")
 image = cv2.imread('./input.jpg')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-FaceCascade = cv2.CascadeClassifier("./data/haarcascade_frontalface_default.xml")
-eye_cascade = cv2.CascadeClassifier("./data/haarcascade_eye_tree_eyeglasses.xml")
+FaceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+eye_cascade = cv2.CascadeClassifier("haarcascade_eye_tree_eyeglasses.xml")
 
 faces = faceCascade.detectMultiScale(
     gray,
