@@ -31,12 +31,6 @@ def main():
 
     run = st.checkbox("Run")
 
-    webrtc_ctx = webrtc_streamer(
-        key="example",
-        video_transformer_factory=FaceDetector,
-        async_transform=False,
-        use_webcam=True,
-    )
 
     if not run:
         st.write('Stopped')
