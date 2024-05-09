@@ -2,9 +2,5 @@ streamlit
 numpy
 opencv-python-headless
 streamlit-webrtc
-webrtc_streamer(key=None, 
-                video_transformer_factory=None, 
-                client_settings=None, 
-                async_transform=False, 
-                **kwargs)
+
 
