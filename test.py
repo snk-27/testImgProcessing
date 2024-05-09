@@ -1,21 +1,14 @@
 import streamlit as st
-import cv2
-import numpy as np
+from streamlit_webrtc import webrtc_streamer
 
-st.title("Webcam Live Feed")
-run = st.checkbox('Run')
-FRAME_WINDOW = st.image([])
-camera = cv2.VideoCapture(0)
+def main():
+    st.title("Webcam Live Feed")
+    run = st.checkbox('Run')
 
-while run:
-    _, frame = camera.read()
+    webrtc_ctx = webrtc_streamer(key="example", video_transformer_factory=None, async_transform=False)
 
-    # Check if the frame is None
-    if frame is None:
-        st.error("Failed to capture frame from the camera.")
-        break
+    if webrtc_ctx.video_transformer:
+        st.write('Stopped')
 
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    FRAME_WINDOW.image(frame)
-else:
-    st.write('Stopped')
+if __name__ == "__main__":
+    main()
